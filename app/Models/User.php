@@ -3,14 +3,23 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasTenants;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser , HasTenants
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, SoftDeletes , HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +30,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'type'
     ];
 
     /**
@@ -42,4 +53,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function bookings() : HasMany
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() == 'facility')
+        {
+            return $this->type == 'manager';
+        }
+        return $this->type == 'admin';
+    }
+
+    public function getTenants(Panel $panel): Collection
+    {
+        return $this->facilities;
+    }
+    
+    public function facilities() : BelongsToMany
+    {
+        return $this->belongsToMany(Facility::class);
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->facilities->contains($tenant);
+    }
+
+
 }

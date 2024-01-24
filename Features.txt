@@ -1,0 +1,7 @@
+users dont have to login,
+menu has ('Categories','Facilities', 'Track Booking','Contact us')
+they can filter facilities by location and a search to search by name and tags
+page track booking , user can search their booking by their booking_code
+show account when user is authenticated
+customizer client action (instead of static 'book')
+when they make a booking , a notification is sent to the owner and a custom action called (approve,cancel) can change the booking state and add a booking code if its confirmed
