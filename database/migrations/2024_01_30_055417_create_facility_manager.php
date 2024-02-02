@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('facility_manager', function (Blueprint $table) {
             $table->id();
             $table->foreignId('facility_id')->constrained()->onDelete('cascade');
-            $table->string('author');
-            $table->string('title');
-            $table->string('image');
-            $table->text('content');
-            $table->index(['facility_id','author']);
+            $table->foreignId('manager_id')->constrained('users')->onDelete('cascade');
+
+            $table->index(['facility_id','manager_id']);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('facility_manager');
     }
 };

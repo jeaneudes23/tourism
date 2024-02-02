@@ -18,7 +18,7 @@ class FacilityFactory extends Factory
     {
         return [
             'name' => fake()->name().rand(0,100),
-            'slug' => fake()->name().rand(0,100),
+            'slug' => fake()->word().rand(0,100),
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'tags' => implode(',', fake()->words(5)),

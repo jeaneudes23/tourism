@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('token');
-            $table->string('email');
-            $table->string('phone');
-            $table->enum('id_type', ['national_id','passport'])->default('national_id');
-            $table->string('id_number');
-
-            $table->index(['token','name']);
+            $table->foreignId('facility_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
+            $table->index(['facility_id','customer_id']);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('bookmarks');
     }
 };

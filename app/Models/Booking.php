@@ -19,14 +19,9 @@ class Booking extends Model
         return $this->belongsTo(Facility::class);
     }
 
-    public function user() : BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function customer() : BelongsTo
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class ,'users');
     }
 
     public function service(): BelongsTo

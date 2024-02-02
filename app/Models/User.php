@@ -54,6 +54,8 @@ class User extends Authenticatable implements FilamentUser , HasTenants
         'password' => 'hashed',
     ];
 
+    protected $appends = ['has_facility'];
+
     public function bookings() : HasMany
     {
         return $this->hasMany(Booking::class);
@@ -61,11 +63,12 @@ class User extends Authenticatable implements FilamentUser , HasTenants
 
     public function canAccessPanel(Panel $panel): bool
     {
-        if ($panel->getId() == 'facility')
+        
+        if ($panel->getId() == 'admin')
         {
-            return $this->type == 'manager';
+            return $this->type == 'admin';
         }
-        return $this->type == 'admin';
+        return true;
     }
 
     public function getTenants(Panel $panel): Collection
@@ -75,12 +78,17 @@ class User extends Authenticatable implements FilamentUser , HasTenants
     
     public function facilities() : BelongsToMany
     {
-        return $this->belongsToMany(Facility::class);
+        return $this->belongsToMany(Facility::class ,'facility_manager', 'manager_id');
     }
 
     public function canAccessTenant(Model $tenant): bool
     {
         return $this->facilities->contains($tenant);
+    }
+
+    public function getHasFacilityAttribute() 
+    {
+        return $this->facilities->count() > 0;
     }
 
 

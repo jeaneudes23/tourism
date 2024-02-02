@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Customer extends Model
+class Manager extends Model
 {
+    use HasFactory;
+
     use HasFactory , SoftDeletes;
 
     protected $table = 'users';
@@ -19,22 +20,17 @@ class Customer extends Model
 
     protected static function booted()
     {
-        static::addGlobalScope('customer', function(Builder $builder){
-            $builder->where('type','customer');
+        static::addGlobalScope('manager', function (Builder $builder) {
+            $builder->where('type', 'manager');
         });
 
-        static::creating(function($user){
-            $user->type = 'customer';
+        static::creating(function ($user) {
+            $user->type = 'manager';
         });
     }
-
+    
     public function facilities() : BelongsToMany
     {
         return $this->belongsToMany(Facility::class);
-    }
-
-    public function bookings() : HasMany
-    {
-        return $this->hasMany(Booking::class);
     }
 }

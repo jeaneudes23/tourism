@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('customer_facility', function (Blueprint $table) {
             $table->id();
             $table->foreignId('facility_id')->constrained()->onDelete('cascade');
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
 
             $table->index(['facility_id','customer_id']);
             $table->softDeletes();

@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Tenancy\EditFacilityProfile;
+use App\Filament\Pages\Tenancy\RegisterFacility;
 use App\Models\Facility;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -27,7 +28,8 @@ class FacilityPanelProvider extends PanelProvider
         return $panel
             ->id('facility')
             ->login()
-            ->tenant(Facility::class)
+            ->tenant(Facility::class , slugAttribute: 'slug')
+            ->tenantRegistration(RegisterFacility::class)
             ->tenantProfile(EditFacilityProfile::class)
             ->path('facility')
             ->colors([

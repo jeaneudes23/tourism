@@ -30,7 +30,7 @@ class FrontPageContentResource extends Resource
                 Section::make()
                 ->compact()
                 ->schema([
-                Textarea::make('title')
+                TextInput::make('title')
                     ->required()
                     ->maxLength(255),
                 Textarea::make('description')

@@ -25,10 +25,7 @@ class Facility extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function blogs() : HasMany
-    {
-        return $this->hasMany(Blog::class);
-    }
+
 
     public function services() : HasMany
     {
@@ -45,8 +42,8 @@ class Facility extends Model
         return $this->hasMany(Booking::class);
     }
 
-    public function users() : BelongsToMany
+    public function managers() : BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class ,'facility_manager','facility_id','manager_id');
     }
 }

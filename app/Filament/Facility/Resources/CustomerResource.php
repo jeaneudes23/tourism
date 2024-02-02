@@ -4,6 +4,7 @@ namespace App\Filament\Facility\Resources;
 
 use App\Filament\Facility\Resources\CustomerResource\Pages;
 use App\Filament\Facility\Resources\CustomerResource\RelationManagers;
+use App\Filament\Resources\UserResource;
 use App\Models\Customer;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -26,57 +27,12 @@ class CustomerResource extends Resource
 
   public static function form(Form $form): Form
   {
-    return $form
-      ->schema([
-        //
-        Section::make()
-          ->columns(2)
-          ->schema([
-            TextInput::make('name')
-              ->required(),
-            TextInput::make('email')
-              ->required(),
-            TextInput::make('phone')
-              ->tel()
-              ->required(),
-            TextInput::make('token')
-              ->required(),
-            Select::make('id_type')
-              ->options([
-                'national_id' => 'National id',
-                'passport' => 'passport',
-              ])
-              ->required()
-              ->default('national_id'),
-            TextInput::make('id_number')
-              ->required()
-          ])
-
-      ]);
+    return UserResource::form($form);
   }
 
   public static function table(Table $table): Table
   {
-    return $table
-      ->columns([
-        //
-        TextColumn::make('name'),
-        TextColumn::make('email'),
-        TextColumn::make('phone'),
-        TextColumn::make('id_type'),
-        TextColumn::make('id_number'),
-      ])
-      ->filters([
-        //
-      ])
-      ->actions([
-        Tables\Actions\EditAction::make(),
-      ])
-      ->bulkActions([
-        Tables\Actions\BulkActionGroup::make([
-          Tables\Actions\DeleteBulkAction::make(),
-        ]),
-      ]);
+    return UserResource::table($table);
   }
 
   public static function getRelations(): array

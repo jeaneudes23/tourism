@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->enum('type',['admin','manager']);
+            $table->enum('type',['admin','manager','customer'])->default('customer');
             $table->softDeletes();
             $table->timestamps();
         });
