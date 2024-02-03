@@ -18,16 +18,6 @@ class Manager extends Model
 
     protected $guarded = [];
 
-    protected static function booted()
-    {
-        static::addGlobalScope('manager', function (Builder $builder) {
-            $builder->where('type', 'manager');
-        });
-
-        static::creating(function ($user) {
-            $user->type = 'manager';
-        });
-    }
     
     public function facilities() : BelongsToMany
     {

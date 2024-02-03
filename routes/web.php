@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FrontPageContentController;
 use App\Http\Controllers\SearchController;
@@ -20,17 +21,13 @@ use Livewire\Volt\Volt;
 |
 */
 
-Route::view('/', 'welcome' , ['frontPage' => FrontPageContent::first() , 'locations' => Location::all() , 'categories' => Category::all()]);
+Route::get('/', [FrontPageContentController::class , 'index'])->name('home');
+
+Volt::route('explore' , 'pages.explore')->name('explore');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-
-Route::middleware(['auth','verified'])->group(function(){
-    Volt::route('home','pages.home')->name('home');
-});
-
-// Route::get('/f/{facility}' , [FacilityController::class , 'show'])->name('facilities.show');
 
 Volt::route('/f/{facility}' , 'facilities.show')->name('facilities.show');
 

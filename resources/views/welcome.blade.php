@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-app-layout>
 
-        <title>{{ config('app.name') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="antialiased">
-        <livewire:welcome.navigation />
         <section class="hero">
             <div class="grid">
                 <div class="h-screen relative col-start-1 row-start-1 before:absolute before:inset-0 before:bg-black/25">
@@ -90,9 +75,5 @@
             </div>
             
         </section> 
-        <footer class="bg-green-600 h-8 mt-16">
-
-        </footer>
-        
-    </body>
-</html>
+    
+</x-app-layout>

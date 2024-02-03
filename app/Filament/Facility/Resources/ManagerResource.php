@@ -7,6 +7,7 @@ use App\Filament\Facility\Resources\ManagerResource\RelationManagers;
 use App\Filament\Resources\UserResource;
 use App\Models\Manager;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -20,9 +21,15 @@ class ManagerResource extends Resource
     protected static ?string $model = User::class;
     protected static ?string $modelLabel = 'Manager';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
     protected static ?string $tenantOwnershipRelationshipName = 'facilities';
     protected static ?string $tenantRelationshipName = 'managers';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Filament::getTenant()->managers->count();
+    }
+
 
     public static function form(Form $form): Form
     {

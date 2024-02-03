@@ -39,6 +39,11 @@ class BookingResource extends Resource
 
   protected static ?string $navigationIcon = 'heroicon-o-arrow-path-rounded-square';
 
+  public static function getNavigationBadge(): ?string
+  {
+      return Filament::getTenant()->bookings->count();
+  }
+
   public static function form(Form $form): Form
   {
     return $form
@@ -161,11 +166,15 @@ class BookingResource extends Resource
         Action::make('Accept')
           ->successNotificationTitle('Booking Cancelled')
           ->requiresConfirmation()
-          ->action(fn (Booking $record, array $data) => $record->update([
+          ->action(function (Booking $record, array $data){
+            $record->update([
             'status' => 'confirmed',
             'confirm_date' => Carbon::today(),
             'manager_message' => $data['manager_message']
-          ]))
+            ]);
+            if (!Filament::getTenant()->customers()->where('customer_id', $record->customer_id)->exists())
+              Filament::getTenant()->customers()->attach($record->customer_id);
+          })
           ->form([
             Textarea::make('manager_message')
           ])

@@ -17,16 +17,6 @@ class Customer extends Model
 
     protected $guarded = [];
 
-    protected static function booted()
-    {
-        static::addGlobalScope('customer', function(Builder $builder){
-            $builder->where('type','customer');
-        });
-
-        static::creating(function($user){
-            $user->type = 'customer';
-        });
-    }
 
     public function facilities() : BelongsToMany
     {

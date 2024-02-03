@@ -89,9 +89,6 @@ class FacilityResource extends Resource
                       ->columnSpanFull(),
                       TextInput::make('slug')
                       ->readOnly(),
-                      TagsInput::make('tags')
-                      ->required()
-                      ->separator(','),
                     ]),
                     
                   ])

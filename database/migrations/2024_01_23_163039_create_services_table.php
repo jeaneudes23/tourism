@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('image')->nullable();
             $table->string('tags')->nullable();
-            $table->string('attachments')->nullable();
             $table->text('description')->nullable();
             $table->decimal('unit_price',12,2)->nullable();
             $table->string('unit')->nullable();

@@ -5,9 +5,11 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Tenancy\EditFacilityProfile;
 use App\Filament\Pages\Tenancy\RegisterFacility;
 use App\Models\Facility;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -29,6 +31,12 @@ class FacilityPanelProvider extends PanelProvider
             ->id('facility')
             ->login()
             ->spa()
+            ->navigationItems([
+                NavigationItem::make()
+                ->label('Front Page')
+                ->icon('heroicon-o-newspaper')
+                ->url('/')
+            ])
             ->tenant(Facility::class , slugAttribute: 'slug')
             ->tenantRegistration(RegisterFacility::class)
             ->tenantProfile(EditFacilityProfile::class)

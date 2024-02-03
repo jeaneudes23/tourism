@@ -5,6 +5,7 @@ namespace App\Filament\Facility\Resources;
 use App\Filament\Facility\Resources\ServiceResource\Pages;
 use App\Filament\Facility\Resources\ServiceResource\RelationManagers;
 use App\Models\Service;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
@@ -32,7 +33,12 @@ class ServiceResource extends Resource
 {
   protected static ?string $model = Service::class;
 
-  protected static ?string $navigationIcon = 'heroicon-o-tag';
+  protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
+
+  public static function getNavigationBadge(): ?string
+  {
+      return Filament::getTenant()->services->count();
+  }
 
   public static function form(Form $form): Form
   {
@@ -73,24 +79,14 @@ class ServiceResource extends Resource
                           ->required(fn (Get $get) => $get('is_bookable'))
                           ->maxLength(255),
                       ]),
-                    Section::make()
-                      ->collapsible()
-                      ->compact()
-                      ->schema([
-
-                        RichEditor::make('description'),
-                      ]),
-
-
+                      RichEditor::make('description'),
                   ]),
                 Step::make('Gallery')
                   ->schema([
                     FileUpload::make('image')
                       ->image(),
-                    TextInput::make('attachments')
-                      ->maxLength(255),
                   ])
-              ])
+              ])->skippable()
           ])
 
 

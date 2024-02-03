@@ -5,6 +5,7 @@ namespace App\Filament\Facility\Resources;
 use App\Filament\Facility\Resources\PhotoResource\Pages;
 use App\Filament\Facility\Resources\PhotoResource\RelationManagers;
 use App\Models\Photo;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -22,7 +23,12 @@ class PhotoResource extends Resource
 {
     protected static ?string $model = Photo::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-camera';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Filament::getTenant()->photos->count();
+    }
 
     public static function form(Form $form): Form
     {

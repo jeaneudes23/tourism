@@ -66,7 +66,7 @@ class User extends Authenticatable implements FilamentUser , HasTenants
         
         if ($panel->getId() == 'admin')
         {
-            return $this->type == 'admin';
+            return $this->is_admin == 1;
         }
         return true;
     }

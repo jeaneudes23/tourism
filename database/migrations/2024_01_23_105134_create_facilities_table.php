@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('slug');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('tags');
             $table->string('image');
             $table->text('google_maps')->nullable();
             $table->string('location')->nullable();

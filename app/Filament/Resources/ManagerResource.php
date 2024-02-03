@@ -22,12 +22,7 @@ class ManagerResource extends Resource
     protected static ?string $model = User::class;
     protected static ?string $modelLabel = 'Manager';
 
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('type','manager');
-    }
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
 
     public static function form(Form $form): Form
     {

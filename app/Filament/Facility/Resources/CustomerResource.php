@@ -6,6 +6,7 @@ use App\Filament\Facility\Resources\CustomerResource\Pages;
 use App\Filament\Facility\Resources\CustomerResource\RelationManagers;
 use App\Filament\Resources\UserResource;
 use App\Models\Customer;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -21,6 +22,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CustomerResource extends Resource
 {
   protected static ?string $model = Customer::class;
+  
+  public static function getNavigationBadge(): ?string
+  {
+      return Filament::getTenant()->customers->count();
+  }
 
   protected static ?string $navigationIcon = 'heroicon-o-user-group';
   protected static ?string $tenantOwnershipRelationshipName = 'facilities';

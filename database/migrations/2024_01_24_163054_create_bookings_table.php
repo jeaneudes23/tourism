@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('facility_id')->constrained()->onDelete('cascade');
             $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
-            $table->string('booking_code')->nullable()->unique();
             
             $table->string('customer_message')->nullable();
             $table->string('manager_message')->nullable();
@@ -29,7 +28,7 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->decimal('total_price',8,2)->nullable();
 
-            $table->index(['facility_id', 'service_id','booking_code']);
+            $table->index(['facility_id', 'service_id']);
             $table->softDeletes();
             $table->timestamps();
         });
