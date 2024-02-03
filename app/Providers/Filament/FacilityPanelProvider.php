@@ -28,6 +28,7 @@ class FacilityPanelProvider extends PanelProvider
         return $panel
             ->id('facility')
             ->login()
+            ->spa()
             ->tenant(Facility::class , slugAttribute: 'slug')
             ->tenantRegistration(RegisterFacility::class)
             ->tenantProfile(EditFacilityProfile::class)

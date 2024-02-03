@@ -30,7 +30,9 @@ Route::middleware(['auth','verified'])->group(function(){
     Volt::route('home','pages.home')->name('home');
 });
 
-Route::get('/f/{facility}' , [FacilityController::class , 'show'])->name('facilities.show');
+// Route::get('/f/{facility}' , [FacilityController::class , 'show'])->name('facilities.show');
+
+Volt::route('/f/{facility}' , 'facilities.show')->name('facilities.show');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

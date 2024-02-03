@@ -35,7 +35,7 @@ new class extends Component
                     </x-nav-link>
                     @auth
                         @if (auth()->user()->has_facility)
-                            <x-nav-link :href="route('filament.facility.pages.dashboard', ['tenant' => auth()->user()->facilities()->first()->slug])" wire:navigate>
+                            <x-nav-link :href="route('facilities.show', auth()->user()->facilities()->first()->slug)" wire:navigate>
                                 {{ auth()->user()->facilities()->first()->name }}
                             </x-nav-link>
                         @else

@@ -20,8 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('tags');
             $table->string('image');
-            $table->string('attachments')->nullable();
-            $table->string('google_maps')->nullable();
+            $table->text('google_maps')->nullable();
             $table->string('location')->nullable();
             $table->string('address')->nullable();
             $table->string('website')->nullable();

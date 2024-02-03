@@ -83,8 +83,10 @@ class FacilityResource extends Resource
                     ->columns(2)
                     ->schema([
                       Textarea::make('title')
+                      ->columnSpanFull()
                       ->required(),
-                      Textarea::make('description'),
+                      RichEditor::make('description')
+                      ->columnSpanFull(),
                       TextInput::make('slug')
                       ->readOnly(),
                       TagsInput::make('tags')
@@ -103,12 +105,6 @@ class FacilityResource extends Resource
                     ->directory('facility-images')
                       ->label('Cover Image')
                       ->required(),
-                    FileUpload::make('attachments')
-                    ->label('More Photos')
-                    ->image()
-                    ->directory('facility-images')
-                    ->multiple()
-                    ->columnSpanFull(),
                   ]),
                 Step::make('Contact Information')
                   ->icon('heroicon-o-identification')
@@ -123,7 +119,9 @@ class FacilityResource extends Resource
                         ->email()
                         ->maxLength(255),
                       Select::make('location')
-                      ->options(Location::query()->pluck('name'))
+                      ->options(Location::pluck('name')->mapWithKeys(function ($location){
+                        return [$location => $location];
+                      }))
                       ->searchable(),
                       TextInput::make('address'),
                       TextInput::make('website'),

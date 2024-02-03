@@ -42,6 +42,11 @@ class Facility extends Model
         return $this->hasMany(Booking::class);
     }
 
+    public function photos() : HasMany
+    {
+        return $this->hasMany(Photo::class);
+    }
+
     public function managers() : BelongsToMany
     {
         return $this->belongsToMany(User::class ,'facility_manager','facility_id','manager_id');

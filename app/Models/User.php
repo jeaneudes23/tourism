@@ -81,6 +81,13 @@ class User extends Authenticatable implements FilamentUser , HasTenants
         return $this->belongsToMany(Facility::class ,'facility_manager', 'manager_id');
     }
 
+
+    public function bookmarks(): BelongsToMany
+    {
+        return $this->belongsToMany(Facility::class , 'bookmarks' , 'customer_id');
+    }
+
+
     public function canAccessTenant(Model $tenant): bool
     {
         return $this->facilities->contains($tenant);
