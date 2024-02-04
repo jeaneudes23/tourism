@@ -15,7 +15,7 @@
                             <p class="text-white max-w-screen-md font-medium tracking-wide md:text-lg">{{$frontPage->description}}</p>
                             <div class="flex text-sm gap-4 flex-wrap text-white">
                                 @forelse ($locations as $location)
-                                <a href="">
+                                <a href="/explore?location={{$location->name}}" wire:navigate>
                                     <span class="inline-flex gap-1 font-medium capitalize px-3 py-1 items-center rounded-md  border-2 border-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -30,7 +30,7 @@
                                 
                             </div>
                         </div>
-                        <a href="/search" class="h-10 md:h-12 px-8 md:px-12 gap-2 bg-green-600 inline-flex items-center rounded-full border-2 border-white tracking-wide font-medium text-white justify-self-start">
+                        <a href="/explore" wire:navigate class="h-10 md:h-12 px-8 md:px-12 gap-2 bg-green-600 inline-flex items-center rounded-full border-2 border-white tracking-wide font-medium text-white justify-self-start">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                               </svg>  
@@ -57,7 +57,7 @@
                 </div>
                 <div class="grid gap-8 grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
                     @forelse ($categories as $category)
-                    <a href="/search?category={{$category->name}}" class="group block border rounded-xl hover:bg-gray-50 transition-all p-2">
+                    <a href="/explore?category={{$category->id}}" wire:navigate class="group block border rounded-xl hover:bg-gray-50 transition-all p-2">
                         <div class="grid">
                             <img class="col-start-1 row-start-1 w-full aspect-video object-cover rounded-xl shadow" src="{{asset('storage/'.$category->image)}}" alt="">
                             <span class="col-start-1 -rotate-[14deg] group-hover:border-green-600 transition-all row-start-1 border-4 border-green-600 border-b-white border-l-white self-end bg-white w-16 -translate-x-1 grid place-content-center font-bold text-xl text-green-600 translate-y-4 aspect-square rounded-full"><span class="rotate-[14deg]">{{$category->facilities_count}}</span></span>

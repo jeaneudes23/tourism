@@ -93,15 +93,12 @@ new class extends Component
             @endauth
      
             @if(!auth()->check())
-            <div class="flex items-center gap-6">      
-                <x-nav-link :href="route('filament.facility.tenant.registration')" wire:navigate>
-                    {{ __('New Facility') }}
-                </x-nav-link>
-                <div class="gap-4 hidden md:flex md:self-center">
-                    <a href="{{ route('login') }}" class="px-4 py-2 border-2 rounded-full border-current" wire:navigate>Log in</a>
-                    <a href="{{ route('register') }}" class="px-4 py-2 border-2 rounded-full text-white border-green-600 bg-green-600 " wire:navigate>Register</a>
-                </div>
+            
+            <div class="gap-4 hidden md:flex md:self-center">
+                <a href="{{ route('login') }}" class="px-4 py-2 border-2 rounded-full border-current" wire:navigate>Log in</a>
+                <a href="{{ route('register') }}" class="px-4 py-2 border-2 rounded-full text-white border-green-600 bg-green-600 " wire:navigate>Register</a>
             </div>
+           
             @endif
 
             <!-- Hamburger -->
