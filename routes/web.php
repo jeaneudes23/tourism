@@ -30,6 +30,7 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Volt::route('/f/{facility}' , 'facilities.show')->name('facilities.show');
+Volt::route('/bookings' , 'bookings.index')->middleware('auth')->name('bookings.index');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

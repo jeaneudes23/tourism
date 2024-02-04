@@ -12,6 +12,12 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        <style>
+            [x-cloak] {
+                display: none !important;
+            }
+        </style>
+ 
         @filamentStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -19,12 +25,13 @@
         <div class="dark:bg-gray-900">
             <livewire:layout.navigation />
             <!-- Page Content -->
-            <main class="min-h-screen">
+            <main class="min-h-screen ">
                 {{ $slot }}
             </main>
             <footer class="h-4 bg-green-600 mt-12">
 
             </footer>
         </div>
+        @filamentScripts
     </body>
 </html>
