@@ -53,13 +53,11 @@ class ServiceResource extends Resource
                   ->schema([
                     Group::make()
                       ->columnSpanFull()
-                      ->columns(3)
+                      ->columns(2)
                       ->schema([
                         TextInput::make('name')
                           ->required()
                           ->maxLength(255),
-                        TagsInput::make('tags')
-                          ->separator(','),
                         Toggle::make('is_bookable')
                           ->live()
                       ]),
@@ -98,8 +96,6 @@ class ServiceResource extends Resource
     return $table
       ->columns([
         TextColumn::make('name')
-          ->searchable(),
-        TextColumn::make('tags')
           ->searchable(),
         IconColumn::make('is_bookable')
         ->boolean(),

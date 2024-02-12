@@ -4,15 +4,21 @@ use App\Models\Facility;
 use App\Models\Category;
 use App\Models\Location;
 
-use function Livewire\Volt\{state, layout , with , usesPagination};
+use function Livewire\Volt\{state, layout , with , usesPagination , computed};
 
 //
 usesPagination();
 layout('layouts.app');
 state(['location'])->url();
 state(['category'])->url();
-state(['categories' => Category::get(['name','id'])]);
-state(['locations' => Location::get(['name','id'])]);
+
+$locations  = computed(function (){
+    return Location::get(['name']);
+})->persist();
+
+$categories  = computed(function (){
+    return Category::get(['id','name']);
+})->persist();
 
 
 with(fn () => ['facilities' => Facility::where('location', 'like' , '%'.$this->location.'%')->where('category_id', 'like' , '%'.$this->category.'%')->paginate(10)]);
@@ -34,7 +40,7 @@ with(fn () => ['facilities' => Facility::where('location', 'like' , '%'.$this->l
                                 <label class="font-medium text-sm" for="category">Category</label>
                                 <select wire:model.live='category' class="rounded-md" name="category" id="category">
                                     <option value="">All</option>
-                                    @forelse ($categories as $category)
+                                    @forelse ($this->categories as $category)
                                         <option value={{$category->id}}>{{$category->name}}</option>
                                     @empty
                                         
@@ -45,7 +51,7 @@ with(fn () => ['facilities' => Facility::where('location', 'like' , '%'.$this->l
                                 <label class="font-medium text-sm" for="location">Location</label>
                                 <select wire:model.live='location' class="rounded-md" name="location" id="loaction">
                                     <option value="">All</option>
-                                    @forelse ($locations as $location)
+                                    @forelse ($this->locations as $location)
                                         <option value={{$location->name}}>{{$location->name}}</option>
                                     @empty
                                         
@@ -68,9 +74,10 @@ with(fn () => ['facilities' => Facility::where('location', 'like' , '%'.$this->l
                             <div class="grid">
                                 <img class="col-start-1 row-start-1 w-full aspect-video object-cover rounded-xl shadow" src="{{asset('storage/'.$facility->image)}}" alt="">
                                 <div class="col-start-1 row-start-1 rounded-xl">
-                                    <div class="flex bg-gradient-to-b from-black gap-2 items-center rounded-xl p-2">
-                                        <img src="{{asset('/storage/'.$facility->category->image)}}" class="w-10 bg-gray-100 border-2 object-cover aspect-square rounded-full" alt="">
-                                        <span class="px-2 text-sm font-medium rounded-md shadow bg-gray-100">{{$facility->category->name}}</span>
+                                    <div class="col-start-1 row-start-1 rounded-xl">
+                                        <div class="bg-gradient-to-b from-black rounded-xl p-2">
+                                            <span class="py-1 px-2 text-sm font-bold rounded shadow bg-gray-100">{{$facility->category->name}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

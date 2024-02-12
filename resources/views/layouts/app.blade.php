@@ -16,6 +16,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        @if (session('filament'))
+            @foreach (session('filament.notifications') as $notification)
+                {{ $notification['title'] }}
+            @endforeach
+        @endif
         <div class="dark:bg-gray-900">
             <livewire:layout.navigation />
             <!-- Page Content -->

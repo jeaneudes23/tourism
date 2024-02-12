@@ -69,8 +69,7 @@ new class extends Component implements HasForms, HasActions
                 $data['service_id'] = $this->service->id;
                 $data['facility_id'] = $this->service->facility->id;
                 return $data;
-            })
-            ->successNotificationTitle('Attendance Recorded');
+            });
     }
 }; ?>
 

@@ -31,6 +31,7 @@ Route::view('dashboard', 'dashboard')
 
 Volt::route('/f/{facility}' , 'facilities.show')->name('facilities.show');
 Volt::route('/bookings' , 'bookings.index')->middleware('auth')->name('bookings.index');
+Volt::route('/my-space' , 'myspace.index')->middleware('auth')->name('myspace.index');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

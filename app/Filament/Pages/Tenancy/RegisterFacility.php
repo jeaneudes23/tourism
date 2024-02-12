@@ -44,13 +44,12 @@ class RegisterFacility extends RegisterTenant
                 return [$location => $location];
                 }))
                 ->searchable(),
-            ]),
-            
+            ]),   
             TextInput::make('name')
-            ->live(onBlur: true)
-            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
-            ->required(),
-            
+            ->required(), 
+            TagsInput::make('tags')
+            ->separator(',')
+            ->required(), 
             Textarea::make('title')
             ->required(),
             FileUpload::make('image')

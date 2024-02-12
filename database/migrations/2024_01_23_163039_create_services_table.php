@@ -18,12 +18,11 @@ return new class extends Migration
             $table->foreignId('facility_id')->constrained()->onDelete('cascade');
             $table->string('name')->unique();
             $table->string('image')->nullable();
-            $table->string('tags')->nullable();
             $table->text('description')->nullable();
             $table->decimal('unit_price',12,2)->nullable();
             $table->string('unit')->nullable();
 
-            $table->index(['facility_id', 'name' ,'tags']);
+            $table->index(['facility_id', 'name']);
             $table->softDeletes();
             $table->timestamps();
         });

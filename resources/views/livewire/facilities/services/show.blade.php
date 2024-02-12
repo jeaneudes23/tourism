@@ -7,7 +7,7 @@ new class extends Component {
     public Service $service;
 }; ?>
 
-<div class="grid grid-cols-[1fr,2fr] border-2 rounded-md">
+<div class="grid grid-cols-[1fr,3fr] border-2 rounded-md">
     <div class="">
         @if ($service->image)   
             <img class="w-full h-full rounded-l-md object-cover" src="{{'/storage/'.$service->image}}" alt="">

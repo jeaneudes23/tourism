@@ -16,6 +16,8 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -57,12 +59,9 @@ class FacilityResource extends Resource
     {
         return $form
         ->schema([
-            Group::make()
-            ->columnSpanFull()
-            ->schema([
-            Wizard::make()
-              ->schema([
-                Step::make('Front Page Content')
+            Tabs::make('')
+              ->tabs([
+                Tab::make('Details')
                 ->icon('heroicon-o-queue-list')
                 ->schema([
                   Group::make()
@@ -75,35 +74,27 @@ class FacilityResource extends Resource
                     ->preload()
                     ->hiddenOn(Facilities::class),
                     TextInput::make('name')
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
                     ->required(),
-                    Group::make()
+                    TagsInput::make('tags')
+                    ->separator(',')
                     ->columnSpanFull()
-                    ->columns(2)
-                    ->schema([
-                      Textarea::make('title')
+                    ->required(),
+                    Textarea::make('title')
                       ->columnSpanFull()
                       ->required(),
-                      RichEditor::make('description')
-                      ->columnSpanFull(),
-                      TextInput::make('slug')
-                      ->readOnly(),
-                    ]),
-                    
-                  ])
-                  
-                 
-                ]),
-                Step::make('Gallery')
-                  ->icon('heroicon-o-camera')
-                  ->schema([
                     FileUpload::make('image')
                     ->directory('facility-images')
                       ->label('Cover Image')
-                      ->required(),
-                  ]),
-                Step::make('Contact Information')
+                      ->columnSpanFull()
+                      ->required(),             
+                  ]) 
+                ]),
+                Tab::make('Home')
+                ->schema([
+                  RichEditor::make('description')
+                  ->columnSpanFull(),
+                ]),
+                Tab::make('Contact Information')
                   ->icon('heroicon-o-identification')
                   ->schema([
                     Group::make()
@@ -126,9 +117,8 @@ class FacilityResource extends Resource
                       
                     ])
                   ]),
-              ])->skippable(),
-              ])
-          ]);
+              ]),
+            ]);
     }
 
     public static function table(Table $table): Table

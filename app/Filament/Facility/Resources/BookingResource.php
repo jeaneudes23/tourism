@@ -144,8 +144,12 @@ class BookingResource extends Resource
     return $table
       ->columns([
         //
-        TextColumn::make('service.name'),
-        TextColumn::make('customer.name'),
+        TextColumn::make('service.name')
+        ->searchable()
+        ->sortable(),
+        TextColumn::make('customer.name')
+        ->searchable()
+        ->sortable(),
         TextColumn::make('status')
           ->badge()
           ->color(fn (string $state): string => match ($state) {
@@ -153,7 +157,11 @@ class BookingResource extends Resource
             'confirmed' => 'success',
             'cancelled' => 'danger',
           }),
+        TextColumn::make('booking_date')
+          ->sortable()
+          ->date(),
         TextColumn::make('created_at')
+          ->sortable()
           ->date(),
 
       ])

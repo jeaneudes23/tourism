@@ -48,19 +48,9 @@ new class extends Component
             <!-- Settings Dropdown -->                
             @auth    
                 <div class="flex gap-4">
-                    <x-nav-link :href="route('bookings.index')" :active="request()->routeIs('bookings.index')" wire:navigate>
-                        {{ __('Bookings') }}
+                    <x-nav-link :href="route('myspace.index')" :active="request()->routeIs('myspace.index')" wire:navigate>
+                        {{ __('My Space') }}
                     </x-nav-link>
-                    @if (auth()->user()->has_facility)
-                        <x-nav-link :href="route('facilities.show', auth()->user()->facilities()->first()->slug)" wire:navigate>
-                            {{ auth()->user()->facilities()->first()->name }}
-                        </x-nav-link>
-                    @else
-                        <x-nav-link :href="route('filament.facility.tenant.registration')">
-                            {{ __('New Facility') }}
-                        </x-nav-link>
-                    @endif
-                
                     <div class="hidden sm:flex sm:items-center">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug');
             $table->string('title');
+            $table->string('tags')->nullable();
             $table->text('description')->nullable();
             $table->string('image');
             $table->text('google_maps')->nullable();
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
 
-            $table->index(['category_id', 'name']);
+            $table->index(['category_id', 'name' , 'tags']);
 
             $table->softDeletes();
             $table->timestamps();
