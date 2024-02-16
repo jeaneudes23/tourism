@@ -53,7 +53,7 @@ with(fn () => ['facilities' => auth()->user()->facilities()->where('location', '
             </div>
         </div>
     </div>
-    <div class="grow grid gap-4">
+    <div class="grow">
         <x-loader-fw />
         <div class="grid gap-4">
             {{$facilities->links()}}

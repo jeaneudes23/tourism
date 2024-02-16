@@ -90,9 +90,7 @@ use function Livewire\Volt\{state , layout , mount};
                 <livewire:facilities.gallery :facility='$facility' />
             @endif
             @if ($tab == 'Contacts')
-                <div class="prose">
-                    {!!$facility->google_maps !!}
-                </div>
+                <livewire:facilities.contacts :facility='$facility' />
             @endif
         </div>
     </section>

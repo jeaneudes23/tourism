@@ -51,4 +51,23 @@ class Facility extends Model
     {
         return $this->belongsToMany(User::class ,'facility_manager','facility_id','manager_id');
     }
+
+    public static function search($category , $location , $q)
+    {
+        $query = self::query();
+
+        if ($location) {
+            $query->where('location', 'like', '%' . $location . '%');
+        }
+
+        if ($q) {
+            $query->where('tags', 'like', '%' . $q . '%')->orWhere('name' , 'like' ,'%'. $q .'%');
+        }
+
+        if ($category) {
+            $query->where('category_id', 'like', '%' . $category . '%');
+        }
+
+        return $query->paginate(10);
+    }
 }

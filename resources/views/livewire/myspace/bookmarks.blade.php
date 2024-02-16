@@ -87,7 +87,6 @@ with(fn () => ['facilities' => auth()->user()->bookmarks()->where('location', 'l
                 @endforelse
             </div>
             {{$facilities->links()}}
-
         </div>
     </div>
 
