@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('facilities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('name')->unique();
             $table->string('slug');
             $table->string('title');
@@ -27,7 +26,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
 
-            $table->index(['category_id', 'name' , 'tags']);
+            $table->index(['name' , 'tags']);
 
             $table->softDeletes();
             $table->timestamps();

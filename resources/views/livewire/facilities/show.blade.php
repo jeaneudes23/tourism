@@ -23,18 +23,11 @@ $changeTab = function ($tab) {
         <div class="xl:h-dvh">
             <img class="w-full h-full object-cover" src={{ asset('/storage/' . $facility->image) }} alt="">
         </div>
-        <div class="bg-white grid content-center px-8">
-            <div class="bg-white">
-                <div>
-                    <p>{{ $facility->category->name }}</p>
-                    <x-location-pill location="{{ $facility->location }}" />
-                </div>
-                <h1 class="text-4xl lg:text-5xl  font-bold tracking-wider">
-                    {{ $facility->name }}
-                </h1>
-                <p class=" max-w-screen-md font-medium tracking-wide md:text-lg">{{ $facility->title }}</p>
-
-            </div>
+        <div class="grid content-center px-8">
+            <h1 class="text-4xl lg:text-5xl  font-bold tracking-wider">
+                {{ $facility->name }}
+            </h1>
+            <p class=" max-w-screen-md font-medium tracking-wide md:text-lg">{{ $facility->title }}</p>
         </div>
     </div>
     <div class="container max-w-7xl">

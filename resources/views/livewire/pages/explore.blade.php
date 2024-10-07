@@ -19,7 +19,7 @@ $locations = computed(function () {
 })->persist();
 
 $categories = computed(function () {
-    return Category::get(['id', 'name']);
+    return Category::get(['name','slug']);
 })->persist();
 
 $overlay = computed(function () {
@@ -46,7 +46,7 @@ with(fn() => ['facilities' => Facility::search($this->category, $this->location,
                   <select wire:model.live='category' class="w-full rounded-l-md border-2 border-r-0" name="category" id="category">
                       <option value="">Select Category</option>
                       @forelse ($this->categories as $category)
-                          <option value={{ $category->id }}>{{ $category->name }}</option>
+                          <option value={{ $category->slug }}>{{ $category->name }}</option>
                       @empty
                       @endforelse
                   </select>
@@ -78,11 +78,20 @@ with(fn() => ['facilities' => Facility::search($this->category, $this->location,
                           <div>
                             <img class="h-auto w-full rounded" src="{{ asset('storage/' . $facility->image) }}" alt="">
                           </div>
-                          <div class="grid gap-2">
-                            <div>{{$facility->category->name}}</div>
+                          <div class="grid gap-2 py-2">
+                            <div class="inline-flex items-center">
+                              <div class="divide-x font-medium text-sm text-primary">
+                                @forelse ($facility->categories as $index => $category)
+                                <span class={{$index === 0 ? 'pr-2' : 'px-2'}}>{{$category->name}}</span>
+                                @empty
+                                
+                                @endforelse
+                              </div>
+                            </div>
                             <h3 class="text-2xl font-bold">{{$facility->name}}</h3>
-                            <div class="line-clamp-3 text-sm max-w-xl">{{$facility->description}}</div>
-                            <p><x-heroicon-o-map-pin class="size-5 inline"/><span class="font-medium">Location:</span> Kigali</p>
+                            <div class="line-clamp-2 max-w-xl">{{$facility->title}}</div>
+                            <p><x-heroicon-o-map-pin class="size-5 inline"/><span class="font-medium">Location:</span> {{$facility->location}}</p>
+                            <p><x-heroicon-o-home class="size-5 inline"/><span class="font-medium">Address:</span> {{$facility->address}}</p>
                           </div>
                        </div>
                     </a>

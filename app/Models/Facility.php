@@ -20,9 +20,9 @@ class Facility extends Model
         'attachments' => 'array',
     ];
 
-    public function category() : BelongsTo
+    public function categories() : BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
 
@@ -65,7 +65,9 @@ class Facility extends Model
         }
 
         if ($category) {
-            $query->where('category_id', 'like', '%' . $category . '%');
+            $query->whereHas('categories' , function($inner) use($category){
+              $inner->where('slug', 'like', '%' . $category . '%');
+            });
         }
 
         return $query->paginate(10);

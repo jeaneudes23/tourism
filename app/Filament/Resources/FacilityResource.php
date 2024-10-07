@@ -43,6 +43,10 @@ class FacilityResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
     protected static ?string $navigationGroup = 'Collection';
 
+    public static function getNavigationBadge(): ?string{
+      return static::getModel()::count();
+    }
+
     protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function getRecordSubNavigation(Page $page): array
@@ -69,9 +73,9 @@ class FacilityResource extends Resource
                   ->columnSpanFull()
                   ->columns(2)
                   ->schema([
-                    Select::make('category_id')
-                    ->relationship('category','name')
-                    ->searchable()
+                    Select::make('categories')
+                    ->multiple()
+                    ->relationship('categories','name')
                     ->preload()
                     ->hiddenOn(Facilities::class),
                     TextInput::make('name')

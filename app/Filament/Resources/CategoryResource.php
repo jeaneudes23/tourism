@@ -18,6 +18,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section as ComponentsSection;
 use Filament\Infolists\Components\Split;
@@ -31,8 +32,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
@@ -40,6 +40,11 @@ class CategoryResource extends Resource
 
   protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
   protected static ?string $navigationGroup = 'Collection';
+
+  public static function getNavigationBadge(): ?string{
+    return static::getModel()::count();
+  }
+
 
   protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
@@ -62,6 +67,11 @@ class CategoryResource extends Resource
           ->columns(2)
           ->schema([
             TextInput::make('name')
+              ->live(onBlur:true)
+              ->afterStateUpdated(fn ($state , Set $set) => $set('slug', Str::slug($state)))
+            ->unique(ignoreRecord:true)
+            ->required(),
+            TextInput::make('slug')
             ->unique(ignoreRecord:true)
             ->required(),
             FileUpload::make('image')
@@ -90,7 +100,6 @@ class CategoryResource extends Resource
       ])
       ->filters([
         //
-        TrashedFilter::make()
       ])
       ->actions([
         Tables\Actions\EditAction::make(),
