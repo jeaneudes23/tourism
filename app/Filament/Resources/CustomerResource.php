@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AdminResource\Pages;
-use App\Filament\Resources\AdminResource\RelationManagers;
-use App\Models\Admin;
+use App\Filament\Resources\CustomerResource\Pages;
+use App\Filament\Resources\CustomerResource\RelationManagers;
+use App\Models\Customer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,11 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AdminResource extends Resource
+class CustomerResource extends Resource
 {
-    protected static ?string $model = Admin::class;
+    protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function getNavigationBadge(): ?string{
       return static::getModel()::count();
@@ -25,12 +25,12 @@ class AdminResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return UserResource::form($form);
+      return UserResource::form($form);
     }
-
+  
     public static function table(Table $table): Table
     {
-        return UserResource::table($table);
+      return UserResource::table($table);
     }
 
     public static function getRelations(): array
@@ -43,10 +43,10 @@ class AdminResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAdmins::route('/'),
-            'create' => Pages\CreateAdmin::route('/create'),
-            'view' => Pages\ViewAdmin::route('/{record}'),
-            'edit' => Pages\EditAdmin::route('/{record}/edit'),
+            'index' => Pages\ListCustomers::route('/'),
+            'create' => Pages\CreateCustomer::route('/create'),
+            'view' => Pages\ViewCustomer::route('/{record}'),
+            'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
     }
 }

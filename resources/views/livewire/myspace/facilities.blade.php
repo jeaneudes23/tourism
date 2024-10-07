@@ -81,18 +81,6 @@ with(fn () => ['facilities' => auth()->user()->facilities()->where('location', '
 
                 </a>
                 @endforeach
-                <div class="self-center rounded-md shadow-sm bg-gray-100 py-4">
-                    <a href="{{route('filament.facility.tenant.registration')}}" class="flex h-full justify-center font-medium text-sm hover:underline">
-                        <span class="inline-flex gap-2 items-center">
-                            <span class="bg-green-600 text-white p-1 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                            </span>
-                            New Facility
-                        </span>
-                    </a>
-                </div>
             </div>
             {{$facilities->links()}}
         </div>

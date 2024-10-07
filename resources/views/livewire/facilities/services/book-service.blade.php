@@ -81,7 +81,7 @@ new class extends Component implements HasForms
     <form wire:submit='book'>
         {{ $this->form }}
 
-        <button wire:loading.disabled class="mt-5 text-white w-24 flex justify-center items-center h-10 bg-green-600 font-medium tracking-wide rounded-md">
+        <button wire:loading.disabled class="mt-5 text-white w-24 flex justify-center items-center h-10 bg-primary font-medium tracking-wide rounded-md">
             <span wire:loading.remove>{{$service->custom_text}}</span>
             <div class="flex justify-center">
                 <div wire:loading.flex class="w-6 aspect-square animate-spin rounded-full border-4 border-white border-l-transparent"></div>

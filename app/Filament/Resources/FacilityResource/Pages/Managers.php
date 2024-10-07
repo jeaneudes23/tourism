@@ -52,13 +52,9 @@ class Managers extends ManageRelatedRecords
                 Tables\Filters\TrashedFilter::make()
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
-                ->mutateFormDataUsing(function(array $data) : array{
-                    $data['type'] = 'manager';
-                    return $data;
-                }),
                 AttachAction::make()
-                ->preloadRecordSelect(),
+                ->preloadRecordSelect()
+                ->recordSelectOptionsQuery(fn (Builder $query) => $query->where('role', 'manager')),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

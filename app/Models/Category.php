@@ -10,7 +10,7 @@ use Illuminate\Validation\Rules\In;
 
 class Category extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory;
 
     protected $guarded = [];
 

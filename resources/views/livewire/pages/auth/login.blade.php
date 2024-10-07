@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.app')] class extends Component
 {
     public LoginForm $form;
 
@@ -28,7 +28,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+<div class="max-w-md mx-auto mt-16">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

@@ -27,7 +27,7 @@
                     <a href="{{ route('login') }}" class="px-4 py-2 border-2 rounded-full border-current" wire:navigate>Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="px-4 py-2 border-2 rounded-full text-white border-green-600 bg-green-600 " wire:navigate>Register</a>
+                        <a href="{{ route('register') }}" class="px-4 py-2 border-2 rounded-full text-white border-primary bg-primary " wire:navigate>Register</a>
                     @endif
                 @endauth
             </div>

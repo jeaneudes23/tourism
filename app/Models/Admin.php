@@ -11,16 +11,21 @@ class Admin extends Model
 {
     protected $table = 'users';
     protected $guarded = [] ;
+    protected $hidden = [
+      'password',
+      'remember_token',
+    ];
     use HasFactory , SoftDeletes;
+    
 
     protected static function booted()
     {
         static::addGlobalScope('manager', function (Builder $builder) {
-            $builder->where('type', 'admin');
+            $builder->where('role', 'admin');
         });
 
         static::creating(function ($user) {
-            $user->type = 'admin';
+            $user->role = 'admin';
         });
     }
     

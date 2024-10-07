@@ -3,8 +3,7 @@
 use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
 
-new class extends Component
-{
+new class extends Component {
     /**
      * Log the current user out of the application.
      */
@@ -16,37 +15,33 @@ new class extends Component
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-background border-b border-gray-100  relative z-50">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}" wire:navigate>
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
+    <div class="container flex h-16 items-center">
+        <!-- Logo -->
+        <div class="shrink-0 flex-grow flex items-center gap-6">
+            <a href="{{ route('home') }}" wire:navigate>
+                <livewire:application-logo />
+            </a>
+
+          
+        </div>
+
+        <div class="hidden lg:flex flex-grow justify-end gap-6">
+            <!-- Search Bar -->
+            <form method="get" action="explore" class="flex-grow max-w-64">
+                <div class="flex-grow flex rounded-xl border bg-white focus-within:border-primary overflow-hidden items-center">
+                    <span class="pl-2">
+                        <x-heroicon-s-magnifying-glass class="size-6" />
+                    </span>
+                    <input type="search" name="q" id="" placeholder="Search"
+                        class="w-full bg-transparent focus:ring-0 focus:border-current border-0">
                 </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('explore')" :active="request()->routeIs('explore')" wire:navigate>
-                        {{ __('Explore') }}
-                    </x-nav-link>
-                    <form method="get" action="explore" class="self-center flex basis-96">
-                        <span class="shrink-0 border border-current pl-2 rounded-l-full border-r-0 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                              </svg>                      
-                        </span>
-                        <input type="text" name="q" id="" placeholder="Search" class="w-full bg-transparent border border-l-0 border-current pr-2 rounded-r-full focus:ring-0 focus:border-current">
-                    </form>     
-                </div>
-            </div>
-
-
-            <!-- Settings Dropdown -->                
-            @auth    
+            </form>
+            <x-nav-link :href="route('explore')" :active="request()->routeIs('explore')" wire:navigate>
+              {{ __('Explore') }}
+            </x-nav-link>
+            @auth
                 <div class="flex gap-4">
                     <x-nav-link :href="route('myspace.index')" :active="request()->routeIs('myspace.index')" wire:navigate>
                         {{ __('My Space') }}
@@ -54,12 +49,17 @@ new class extends Component
                     <div class="hidden sm:flex sm:items-center">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                    <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                                <button
+                                    class="inline-flex items-center px-3 py-2 border text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                                        x-on:profile-updated.window="name = $event.detail.name"></div>
 
                                     <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
                                         </svg>
                                     </div>
                                 </button>
@@ -81,59 +81,59 @@ new class extends Component
                     </div>
                 </div>
             @endauth
-     
-            @if(!auth()->check())
-            
-            <div class="gap-4 hidden md:flex md:self-center">
-                <a href="{{ route('login') }}" class="px-4 py-2 border-2 rounded-full border-current" wire:navigate>Log in</a>
-                <a href="{{ route('register') }}" class="px-4 py-2 border-2 rounded-full text-white border-green-600 bg-green-600 " wire:navigate>Register</a>
-            </div>
-           
+
+            @if (!auth()->check())
+                  <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>Login</x-nav-link>
+                  <x-nav-link :href="route('register')" :active="request()->routeIs('register')" wire:navigate>Register</x-nav-link>
             @endif
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
         </div>
+        <!-- Hamburger -->
+        <div class="flex items-center lg:hidden">
+            <button @click="open = ! open"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
+                <x-heroicon-c-bars-3-bottom-right class="size-5"/>
+            </button>
+        </div>
+
+
     </div>
 
     <!-- Responsive Navigation Menu -->
-    
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('explore')" :active="request()->routeIs('explore')" wire:navigate>
                 {{ __('Explore') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('myspace.index')" :active="request()->routeIs('myspace.index')" wire:navigate>
+                My Space
+            </x-responsive-nav-link>
         </div>
 
         @auth
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
-            </div>
+            <!-- Responsive Settings Options -->
+            <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                <div class="px-4">
+                    <div class="font-medium text-base text-gray-800 dark:text-gray-200" x-data="{{ json_encode(['name' => auth()->user()->name]) }}"
+                        x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                    <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
+                </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <button wire:click="logout" class="w-full text-start">
-                    <x-responsive-nav-link>
-                        {{ __('Log Out') }}
+                <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
-                </button>
+
+                    <!-- Authentication -->
+                    <button wire:click="logout" class="w-full text-start">
+                        <x-responsive-nav-link>
+                            {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </button>
+                </div>
             </div>
-        </div>
         @endauth
     </div>
-    
+
 </nav>

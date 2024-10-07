@@ -9,7 +9,7 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.app')] class extends Component
 {
     public string $name = '';
     public string $email = '';
@@ -37,7 +37,7 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
+<div class="max-w-md mx-auto mt-16">
     <form wire:submit="register">
         <!-- Name -->
         <div>

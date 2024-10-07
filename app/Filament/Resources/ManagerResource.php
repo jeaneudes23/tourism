@@ -19,10 +19,14 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ManagerResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Manager::class;
     protected static ?string $modelLabel = 'Manager';
 
-    protected static ?string $navigationIcon = 'heroicon-o-shield-check';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    public static function getNavigationBadge(): ?string{
+      return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {

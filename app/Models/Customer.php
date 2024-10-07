@@ -16,7 +16,20 @@ class Customer extends Model
     protected $table = 'users';
 
     protected $guarded = [];
+    protected $hidden = [
+      'password',
+      'remember_token',
+    ];
 
+    public static function booted(){
+      static::addGlobalScope('customer', function(Builder $builder){
+        $builder->where('role','customer');
+      });
+
+      static::creating(function($customer){
+        $customer->role = 'customer';
+      });
+    }
 
     public function facilities() : BelongsToMany
     {

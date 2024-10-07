@@ -38,7 +38,7 @@ class FacilityPanelProvider extends PanelProvider
                 ->url('/')
             ])
             ->tenant(Facility::class , slugAttribute: 'slug')
-            ->tenantRegistration(RegisterFacility::class)
+            // ->tenantRegistration(RegisterFacility::class)
             ->tenantProfile(EditFacilityProfile::class)
             ->path('facility')
             ->colors([

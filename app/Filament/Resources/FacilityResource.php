@@ -60,6 +60,7 @@ class FacilityResource extends Resource
         return $form
         ->schema([
             Tabs::make('')
+              ->columnSpanFull()
               ->tabs([
                 Tab::make('Details')
                 ->icon('heroicon-o-queue-list')
@@ -74,10 +75,14 @@ class FacilityResource extends Resource
                     ->preload()
                     ->hiddenOn(Facilities::class),
                     TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->live(onBlur:true)
+                    ->afterStateUpdated(fn ($state, Set $set) => $set('slug' , Str::slug($state))),
+                    TextInput::make('slug')
+                    ->required()
+                    ->unique(ignoreRecord:true),
                     TagsInput::make('tags')
                     ->separator(',')
-                    ->columnSpanFull()
                     ->required(),
                     Textarea::make('title')
                       ->columnSpanFull()

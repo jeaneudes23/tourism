@@ -19,8 +19,6 @@ class CategoryFactory extends Factory
         return [
             //
             'name' => fake()->word(),
-            'description' => fake()->paragraph(),
-            'tags' => implode(',',fake()->words(5)),
             'image' => '',
         ];
     }

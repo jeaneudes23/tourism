@@ -23,9 +23,9 @@ use function Livewire\Volt\{with, usesPagination, layout, state};
     <div class="flex gap-8">
         <div class="relative grow grid gap-4">
             <div wire:loading.flex class="absolute w-full h-2 justify-between overflow-hidden">
-            <div class="w-1/4 h-full bg-green-600 animate-ping"></div>
-            <div class="w-1/4 h-full bg-green-600 animate-ping"></div>
-            <div class="w-1/4 h-full bg-green-600 animate-ping"></div>
+            <div class="w-1/4 h-full bg-primary animate-ping"></div>
+            <div class="w-1/4 h-full bg-primary animate-ping"></div>
+            <div class="w-1/4 h-full bg-primary animate-ping"></div>
         </div>
             @forelse($bookings as $booking)
             <div class="grid grid-cols-[1fr,3fr]">
@@ -43,7 +43,7 @@ use function Livewire\Volt\{with, usesPagination, layout, state};
                 <div class="p-4 border-2 rounded-r-lg grid gap-2">
                     <div class="grid gap-1">
                         <div class="flex items-center justify-between">
-                            <a class="hover:text-green-600 transition-all" href="{{route('facilities.show' , $booking->facility->slug)}}"><span class="font-medium">Facility: </span>{{$booking->facility->name}}</a>
+                            <a class="hover:text-primary transition-all" href="{{route('facilities.show' , $booking->facility->slug)}}"><span class="font-medium">Facility: </span>{{$booking->facility->name}}</a>
                             <div class="bg-gray-100 font-medium shadow px-4 h-10 flex items-center justify-center rounded-full">
                                 <span class="sr-only">Status: </span> <span>{{$booking->status}}</span>
                             </div>

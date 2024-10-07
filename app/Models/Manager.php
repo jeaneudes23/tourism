@@ -17,7 +17,20 @@ class Manager extends Model
     protected $table = 'users';
 
     protected $guarded = [];
+    protected $hidden = [
+      'password',
+      'remember_token',
+    ];
 
+    public static function booted(){
+      static::addGlobalScope('manager', function(Builder $builder) {
+        $builder->where('role','manager');
+      });
+
+      static::creating(function($manager){
+        $manager->role = 'manager';
+      });
+    }
     
     public function facilities() : BelongsToMany
     {

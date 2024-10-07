@@ -56,7 +56,7 @@ with(fn () => ['bookings' => Booking::where('customer_id', auth()->user()->id)->
                     <div class="p-4 border-2 rounded-r-lg grid gap-2">
                         <div class="grid gap-1">
                             <div class="flex items-center justify-between">
-                                <a class="hover:text-green-600 transition-all" href="{{route('facilities.show' , $booking->facility->slug)}}"><span class="font-medium">Facility: </span>{{$booking->facility->name}}</a>
+                                <a class="hover:text-primary transition-all" href="{{route('facilities.show' , $booking->facility->slug)}}"><span class="font-medium">Facility: </span>{{$booking->facility->name}}</a>
                                 <div class="bg-gray-100 font-medium shadow px-4 h-10 flex items-center justify-center rounded-full">
                                     <span class="sr-only">Status: </span> <span>{{$booking->status}}</span>
                                 </div>

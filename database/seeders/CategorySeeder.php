@@ -19,39 +19,23 @@ class CategorySeeder extends Seeder
         $categories = [
             [
                 'name' => 'Hotels',
-                'description' => "Explore a range of comfortable and luxurious accommodations.",
-                'tags' => 'luxury,boutique,comfort,travel,hospitality',
-                'image' => 'category-headers/hotels-header.jpg',
+                'image' => 'category-headers/hotel.png',
             ],
             [
                 'name' => 'Car Rental',
-                'description' => "Discover convenient and reliable car rental services.",
-                'tags' => 'car,rental,car rental,travel,road trip',
-                'image' => 'category-headers/car-rental-header.jpg',
+                'image' => 'category-headers/car.png',
             ],
             [
                 'name' => 'Museums',
-                'description' => 'Car rental services for exploring the city.',
-                'tags' => 'Museums, Art and Culture, History Exploration, Educational Experiences, Cultural Exhibitions',
-                'image' => 'category-headers/museum-header.jpg',
+                'image' => 'category-headers/museum.png',
             ],
             [
                 'name' => 'Gyms',
-                'description' => 'Elevate your fitness journey with our selection of gyms and fitness centers.',
-                'tags' => 'gym,fitness,health,wellness,exercise,training',
-                'image' => 'category-headers/gyms-header.jpg',
-            ],
-            [
-                'name' => 'NightClubs',
-                'description' => 'Immerse yourself in the electric atmosphere of our vibrant nightlife and clubs.',
-                'tags' => 'nightclub,nightlife,dance,entertainment',
-                'image' => 'category-headers/clubs-header.jpg',
+                'image' => 'category-headers/gym.png',
             ],
             [
                 'name' => 'Marketplace',
-                'description' => 'Explore the convenience of our urban marketplace.',
-                'tags' => 'supermarkets,shops,Essentials,food,products',
-                'image' => 'category-headers/markets-header.jpg',
+                'image' => 'category-headers/market.png',
             ],
         ];
 

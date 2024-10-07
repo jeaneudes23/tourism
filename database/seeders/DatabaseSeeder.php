@@ -24,22 +24,20 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Youdes',
             'email' => 'admin@test.com',
-            'phone' => '0787387250',
-            'is_admin' => '1',
+            'role' => 'admin',
             'password' => Hash::make('password'),
         ]);
 
         FrontPageContent::create([
             'title' => 'RWANDA TOURISM',
             'description' => "Embark on an unforgettable journey through the heart of Rwanda with 'Rwanda Roam Reviews,' your ultimate guide to the nation's most enchanting destinations.",
-            'image' => '01HNMGBFW5JZYBS3K2MBHJS8Q8.jpg'
+            'logo' => 'logo.png',
+            'overlay' => 'overlay.png'
         ]);
 
         $locations = [['name'=> 'Kigali'],['name'=> 'Musanze'],['name'=> 'Gisenyi'],['name'=> 'Butare']];
 
         DB::table('locations')->insert($locations);
         
-
-
     }
 }

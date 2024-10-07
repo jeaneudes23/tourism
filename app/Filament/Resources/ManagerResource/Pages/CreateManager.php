@@ -8,11 +8,5 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateManager extends CreateRecord
 {
-    protected static string $resource = ManagerResource::class;
-
-    protected function mutateFormDataBeforeCreate(array $data): array
-    {
-        $data['type'] = 'manager';
-        return $data;
-    }
+  protected static string $resource = ManagerResource::class;
 }

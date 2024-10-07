@@ -62,19 +62,12 @@ class CategoryResource extends Resource
           ->columns(2)
           ->schema([
             TextInput::make('name')
+            ->unique(ignoreRecord:true)
             ->required(),
-            TagsInput::make('tags')
-              ->required()
-              ->separator(','),
             FileUpload::make('image')
-              ->columnSpanFull()
               ->directory('category-headers')
               ->required()
               ->image(),
-            Textarea::make('description')
-              ->required()
-              ->rows(5)
-              ->columnSpanFull(),
           ]),
       ]);
   }
@@ -85,8 +78,6 @@ class CategoryResource extends Resource
       ->columns([
         ImageColumn::make('image'),
         TextColumn::make('name'),
-        TextColumn::make('tags')
-          ->badge(),
         TextColumn::make('facilities_count')->counts('facilities'),
         TextColumn::make('created_at')
           ->dateTime()

@@ -17,86 +17,83 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements FilamentUser , HasTenants
+class User extends Authenticatable implements FilamentUser, HasTenants
 {
-    use HasApiTokens, SoftDeletes , HasFactory, Notifiable;
+  use HasApiTokens, SoftDeletes, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
-        'type'
-    ];
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array<int, string>
+   */
+  protected $fillable = [
+    'name',
+    'email',
+    'password',
+    'phone',
+    'type'
+  ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+  /**
+   * The attributes that should be hidden for serialization.
+   *
+   * @var array<int, string>
+   */
+  protected $hidden = [
+    'password',
+    'remember_token',
+  ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+  /**
+   * The attributes that should be cast.
+   *
+   * @var array<string, string>
+   */
+  protected $casts = [
+    'email_verified_at' => 'datetime',
+    'password' => 'hashed',
+  ];
 
-    protected $appends = ['has_facility'];
+  protected $appends = ['has_facility'];
 
-    public function bookings() : HasMany
-    {
-        return $this->hasMany(Booking::class);
-    }
+  public function bookings(): HasMany
+  {
+    return $this->hasMany(Booking::class);
+  }
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        
-        if ($panel->getId() == 'admin')
-        {
-            return $this->is_admin == 1;
-        }
-        return true;
-    }
+  public function canAccessPanel(Panel $panel): bool
+  {
 
-    public function getTenants(Panel $panel): Collection
-    {
-        return $this->facilities;
-    }
-    
-    public function facilities() : BelongsToMany
-    {
-        return $this->belongsToMany(Facility::class ,'facility_manager', 'manager_id');
-    }
+    if ($panel->getId() == 'admin') return $this->role == 'admin' && $this->is_active === 1;
+    if ($panel->getId() === 'facility') return $this->role == 'manager' && $this->is_active === 1;
 
+    return 0;
+  }
 
-    public function bookmarks(): BelongsToMany
-    {
-        return $this->belongsToMany(Facility::class , 'bookmarks' , 'customer_id');
-    }
+  public function getTenants(Panel $panel): Collection
+  {
+    return $this->facilities;
+  }
+
+  public function facilities(): BelongsToMany
+  {
+    return $this->belongsToMany(Facility::class, 'facility_manager', 'manager_id');
+  }
 
 
-    public function canAccessTenant(Model $tenant): bool
-    {
-        return $this->facilities->contains($tenant);
-    }
-
-    public function getHasFacilityAttribute() 
-    {
-        return $this->facilities->count() > 0;
-    }
+  public function bookmarks(): BelongsToMany
+  {
+    return $this->belongsToMany(Facility::class, 'bookmarks', 'customer_id');
+  }
 
 
+  public function canAccessTenant(Model $tenant): bool
+  {
+    return $this->facilities->contains($tenant);
+  }
+
+  public function getHasFacilityAttribute()
+  {
+    return $this->facilities->count() > 0;
+  }
 }

@@ -31,7 +31,7 @@ use function Livewire\Volt\{state};
             </button>
        </div>
        <div wire:loading.flex class="h-full justify-center items-center w-full">
-            <div class="w-10 border-4 rounded-full aspect-square border-l-transparent animate-spin border-green-600"></div>
+            <div class="w-10 border-4 rounded-full aspect-square border-l-transparent animate-spin border-primary"></div>
         </div>
        <div class="p-6">
         @if (!$booking)
@@ -45,9 +45,9 @@ use function Livewire\Volt\{state};
             <div class="prose max-w-screen-md my-4">{!!$service->description!!}</div>
             @if ($service->is_bookable)
                 <div class="flex gap-12 items-center">
-                    <p class="text-lg border-b-2 py-2 border-green-600"><span class="font-semibold">{{$service->unit_price}}</span> RWF/ {{$service->unit}}</p>
+                    <p class="text-lg border-b-2 py-2 border-primary"><span class="font-semibold">{{$service->unit_price}}</span> RWF/ {{$service->unit}}</p>
                     @auth
-                        <button wire:click='showHideBooking()' class="px-4 py-2 bg-green-600 rounded-md text-white font-medium tracking-wide">
+                        <button wire:click='showHideBooking()' class="px-4 py-2 bg-primary rounded-md text-white font-medium tracking-wide">
                             {{$service->custom_text}}
                         </button>
                     @endauth
