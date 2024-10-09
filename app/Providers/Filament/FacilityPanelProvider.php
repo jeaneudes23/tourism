@@ -30,6 +30,7 @@ class FacilityPanelProvider extends PanelProvider
         return $panel
             ->id('facility')
             ->login()
+            ->databaseNotifications()
             ->spa()
             ->navigationItems([
                 NavigationItem::make()
@@ -42,7 +43,7 @@ class FacilityPanelProvider extends PanelProvider
             ->tenantProfile(EditFacilityProfile::class)
             ->path('facility')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#659bad',
             ])
             ->discoverResources(in: app_path('Filament/Facility/Resources'), for: 'App\\Filament\\Facility\\Resources')
             ->discoverPages(in: app_path('Filament/Facility/Pages'), for: 'App\\Filament\\Facility\\Pages')

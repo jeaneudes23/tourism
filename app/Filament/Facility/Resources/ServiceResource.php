@@ -11,6 +11,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -66,13 +67,21 @@ class ServiceResource extends Resource
                       ->columnSpanFull()
                       ->compact()
                       ->collapsible()
-                      ->columns(3)
+                      ->columns(2)
                       ->schema([
                         TextInput::make('custom_text')
                           ->default('book'),
                         TextInput::make('unit_price')
                           ->required(fn (Get $get) => $get('is_bookable'))
                           ->numeric(),
+                        Select::make('currency')
+                          ->required(fn (Get $get) => $get('is_bookable'))
+                          ->options([
+                            'RWF' => 'Rwandan Francs',
+                            'USD' => 'US Dollars',
+                          ])
+                          ->native(0)
+                          ,
                         TextInput::make('unit')
                           ->required(fn (Get $get) => $get('is_bookable'))
                           ->maxLength(255),

@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Facility\Resources\BookingResource;
 use App\Models\Booking;
 use App\Models\Service;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -12,6 +13,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Set;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Support\Colors\Color;
 use Livewire\Volt\Component;
 use Illuminate\Support\Str;
@@ -69,6 +72,18 @@ new class extends Component implements HasForms, HasActions
                 $data['service_id'] = $this->service->id;
                 $data['facility_id'] = $this->service->facility->id;
                 return $data;
+            })
+            ->after(function (Booking $record){
+              Notification::make()
+              ->title('New Booking')
+              ->actions([
+                Action::make('view')
+                  ->icon('heroicon-o-eye')
+                  ->url(BookingResource::getUrl('view', ['record' => $record->id] , true ,'facility' , $record->facility))
+                  ->button()
+              ])
+              ->sendToDatabase($record->facility->managers);
+
             });
     }
 }; ?>

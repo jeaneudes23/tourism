@@ -3,7 +3,7 @@ use App\Models\Facility;
 use function Livewire\Volt\{state, layout, mount};
 
 //
-layout('layouts.actions');
+layout('layouts.app');
 
 state(['facility']);
 state(['tab' => 'Home'])->url();

@@ -15,7 +15,7 @@ class Admin extends Model
       'password',
       'remember_token',
     ];
-    use HasFactory , SoftDeletes;
+    use HasFactory ;
     
 
     protected static function booted()

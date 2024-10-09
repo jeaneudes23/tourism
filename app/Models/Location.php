@@ -11,5 +11,5 @@ class Location extends Model
     protected $fillable = [
         'name'
     ];
-    use HasFactory , SoftDeletes;
+    use HasFactory ;
 }

@@ -5,7 +5,7 @@ use function Livewire\Volt\{state , mount};
     state(['facility']);
 ?>
 
-<div class="grid gap-8 grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
+<div class="grid gap-8 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
     @forelse ($facility->photos as $photo)
         <div class="grid content-start">
             <div class="col-start-1 row-start-1">

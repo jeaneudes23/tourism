@@ -29,7 +29,7 @@ new class extends Component {
         <div class="prose max-w-screen-md my-4">{!!$service->description!!}</div>
         @if ($service->is_bookable)
             <div class="flex gap-12 items-center">
-                <p class="text-lg border-b-2 py-2 border-primary"><span class="font-semibold">{{$service->unit_price}}</span> RWF/ {{$service->unit}}</p>
+                <p class="text-lg border-b-2 py-2 border-primary"><span class="font-semibold">{{$service->unit_price}}</span> {{$service->currency}}/ {{$service->unit}}</p>
                 @auth
                     <livewire:facilities.services.book-action :service='$service' />
                 @endauth

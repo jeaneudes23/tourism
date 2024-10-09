@@ -25,10 +25,8 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-
+            $table->tinyInteger('is_active')->default(1);
             $table->index(['name' , 'tags']);
-
-            $table->softDeletes();
             $table->timestamps();
         });
     }

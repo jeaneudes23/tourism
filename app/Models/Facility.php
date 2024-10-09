@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Facility extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -61,7 +61,11 @@ class Facility extends Model
         }
 
         if ($q) {
-            $query->where('tags', 'like', '%' . $q . '%')->orWhere('name' , 'like' ,'%'. $q .'%');
+            $query->where(function($sub) use($q) {
+              $sub->where('tags', 'like', '%' . $q . '%')
+              ->orWhere('name' , 'like' ,'%'. $q .'%')
+              ->orWhere('address', 'like' , '%' . $q . '%');
+            });
         }
 
         if ($category) {

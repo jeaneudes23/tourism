@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Photo extends Model
 {
     protected $guarded = [];
-    use HasFactory , SoftDeletes;
+    use HasFactory;
 
     public function facility()
     {

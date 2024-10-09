@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-
             $table->index(['name']);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

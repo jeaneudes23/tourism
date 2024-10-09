@@ -21,6 +21,7 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
@@ -89,8 +90,8 @@ class FacilityResource extends Resource
                     ->separator(',')
                     ->required(),
                     Textarea::make('title')
-                      ->columnSpanFull()
                       ->required(),
+                    Toggle::make('is_active'),
                     FileUpload::make('image')
                     ->directory('facility-images')
                       ->label('Cover Image')
@@ -140,7 +141,8 @@ class FacilityResource extends Resource
                 ->searchable(),
                 TextColumn::make('location')
                 ->searchable(),
-                TextColumn::make('category.name')
+                TextColumn::make('categories.name')
+                ->badge()
                 ->searchable(),
                 TextColumn::make('tags')
                 ->searchable(),

@@ -12,7 +12,7 @@ class Manager extends Model
 {
     use HasFactory;
 
-    use HasFactory , SoftDeletes;
+    use HasFactory ;
 
     protected $table = 'users';
 

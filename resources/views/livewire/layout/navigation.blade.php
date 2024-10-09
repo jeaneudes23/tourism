@@ -15,7 +15,7 @@ new class extends Component {
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="bg-background border-b border-gray-100  relative z-50">
+<nav x-data="{ open: false }" class="bg-background border-b border-gray-100 z-50 sticky top-0">
     <!-- Primary Navigation Menu -->
     <div class="container flex h-16 items-center">
         <!-- Logo -->
@@ -42,6 +42,7 @@ new class extends Component {
               {{ __('Explore') }}
             </x-nav-link>
             @auth
+               @livewire('database-notifications')
                 <div class="flex gap-4">
                     <x-nav-link :href="route('myspace.index')" :active="request()->routeIs('myspace.index')" wire:navigate>
                         {{ __('My Space') }}

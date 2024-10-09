@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('manager_id')->constrained('users')->onDelete('cascade');
 
             $table->index(['facility_id','manager_id']);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

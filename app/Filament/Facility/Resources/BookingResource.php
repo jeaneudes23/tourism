@@ -92,7 +92,7 @@ class BookingResource extends Resource
                       ->minValue(1)
                       ->label(function (Get $get): string {
                         $unit = Service::where('id', $get('service_id'))->get()->value('unit');
-                        $plural = Str::plural(Str::upper($unit));
+                        $plural = Str::plural($unit);
                         return $plural;
                       })
                       ->afterStateUpdated(function (Get $get, Set $set, $state): void {
@@ -108,8 +108,7 @@ class BookingResource extends Resource
                   ->columnSpanFull()
                   ->columns(2)
                   ->schema([
-                    TextInput::make('booking_code')
-                      ->unique(Booking::class, 'booking_code', ignoreRecord: true),
+                    DatePicker::make('booking_date'),
                     Select::make('status')
                       ->options([
                         'pending' => 'Pending',
@@ -122,7 +121,7 @@ class BookingResource extends Resource
                   ->columnSpanFull()
                   ->columns(2)
                   ->schema([
-                    DatePicker::make('booking_date'),
+                   
                     DatePicker::make('confirm_date'),
                     DatePicker::make('cancel_date'),
                   ]),

@@ -23,11 +23,6 @@
 </head>
 
 <body class="font-sans antialiased text-foreground bg-background">
-    @if (session('filament'))
-        @foreach (session('filament.notifications') as $notification)
-            {{ $notification['title'] }}
-        @endforeach
-    @endif
     <div class="dark:bg-gray-900">
         <livewire:layout.navigation />
         <!-- Page Content -->
@@ -38,6 +33,7 @@
 
         </footer>
     </div>
+    @filamentScripts
 </body>
 
 </html>

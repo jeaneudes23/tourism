@@ -29,7 +29,6 @@ return new class extends Migration
             $table->decimal('total_price',8,2)->nullable();
 
             $table->index(['facility_id', 'service_id']);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

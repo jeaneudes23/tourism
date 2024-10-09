@@ -52,7 +52,7 @@
             <h2 class="text-4xl font-bold text-center">Categories</h2>
             <div class="grid gap-8 grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
                 @forelse ($categories as $category)
-                    <a href="/explore?category={{ $category->id }}" wire:navigate
+                    <a href="/explore?category={{ $category->slug }}" wire:navigate
                         class="grid border rounded hover:bg-gray-50 transition-all p-4 gap-4">
                         <img class="max-w-20 mx-auto" src="{{ asset('storage/' . $category->image) }}" alt="">
                         <h3 class="font-semibold text-2xl text-center">{{ $category->name }} </h3>
