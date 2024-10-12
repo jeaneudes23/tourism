@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Filament\Notifications\Livewire\DatabaseNotifications;
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,5 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        FilamentColor::register([
+          'primary' => '#659bad'
+        ]);
     }
 }

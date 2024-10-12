@@ -7,6 +7,7 @@ use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\CreateAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -30,8 +31,7 @@ new class extends Component implements HasForms, HasActions
     public function createAction()
     {
         return CreateAction::make()
-            ->icon('heroicon-o-bolt')
-            ->color(Color::Green)
+            ->color('primary')
             ->label($this->service->custom_text)
             ->model(Booking::class)
             ->createAnother(false)
@@ -43,7 +43,7 @@ new class extends Component implements HasForms, HasActions
                             ->columnSpan(2)
                             ->columns(3)
                             ->schema([
-                                DatePicker::make('booking_date')
+                                DateTimePicker::make('booking_date')
                                     ->minDate(now()->addDays(2))
                                     ->closeOnDateSelection()
                                     ->native(0)
@@ -59,7 +59,7 @@ new class extends Component implements HasForms, HasActions
                                         $set('total_price', $total);
                                     }),
                                 TextInput::make('total_price')
-                                    ->suffix('RWF')
+                                    ->suffix($this->service->currency)
                                     ->required()
                                     ->readOnly(),
                             ]),

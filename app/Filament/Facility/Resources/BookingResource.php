@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -108,7 +109,7 @@ class BookingResource extends Resource
                   ->columnSpanFull()
                   ->columns(2)
                   ->schema([
-                    DatePicker::make('booking_date'),
+                    DateTimePicker::make('booking_date'),
                     Select::make('status')
                       ->options([
                         'pending' => 'Pending',
@@ -121,9 +122,8 @@ class BookingResource extends Resource
                   ->columnSpanFull()
                   ->columns(2)
                   ->schema([
-                   
-                    DatePicker::make('confirm_date'),
-                    DatePicker::make('cancel_date'),
+                    DateTimePicker::make('confirm_date'),
+                    DateTimePicker::make('cancel_date'),
                   ]),
               ]),
             Section::make('Notes')

@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('manager_message')->nullable();
             $table->enum('status', ['pending','cancelled','confirmed'])->default('pending');
 
-            $table->date('booking_date')->nullable();
-            $table->date('confirm_date')->nullable();
-            $table->date('cancel_date')->nullable();
+            $table->timestamp('booking_date')->nullable();
+            $table->timestamp('confirm_date')->nullable();
+            $table->timestamp('cancel_date')->nullable();
 
             $table->integer('quantity')->nullable();
             $table->decimal('total_price',8,2)->nullable();

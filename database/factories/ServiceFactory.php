@@ -20,7 +20,6 @@ class ServiceFactory extends Factory
             'is_bookable' => fake()->boolean(8),
             'custom_text' => fake()->word(),
             'name' => fake()->word(),
-            'image' => fake()->imageUrl(),
             'description' => fake()->paragraph(),
             'unit_price' => fake()->randomFloat(2, 10, 1000),
             'unit' => fake()->word(), 
