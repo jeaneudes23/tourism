@@ -52,8 +52,7 @@ class FacilityPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Facility/Widgets'), for: 'App\\Filament\\Facility\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                
             ])
             ->middleware([
                 EncryptCookies::class,

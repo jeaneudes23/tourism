@@ -35,7 +35,7 @@ with(
     </div>
     <div class="grid gap-4">
         {{ $bookings->links() }}
-        <div class="grid sm:grid-cols-2 gap-6">
+        <div class="grid sm:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8">
             @forelse ($bookings as $booking)
                 <x-booking-card :booking="$booking"/>
             @empty

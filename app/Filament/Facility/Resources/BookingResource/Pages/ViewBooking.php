@@ -9,6 +9,7 @@ use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Actions\Action as ActionsAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +58,26 @@ class ViewBooking extends ViewRecord
         ])
         ->color('danger')
         ->hidden(fn(Model $record): bool => $record->status == 'cancelled'),
+      Action::make('Notify Customer')
+      ->successNotificationTitle('Booking Cancelled')
+      ->requiresConfirmation()
+      ->action(fn(Booking $record, array $data) => $record->update([
+        'manager_message' => $data['manager_message']
+      ]))
+      ->form([
+        Textarea::make('manager_message')
+      ])
+      ->color('warning')
+      ->after(function (Booking $record) {
+        Notification::make()
+        ->title('Booking Update')
+        ->actions([
+          ActionsAction::make('View')
+          ->url(fn () => route('myspace.index'))
+        ])
+        ->body($record->manager_message)
+        ->sendToDatabase($record->customer);
+      }),
     ];
   }
 }

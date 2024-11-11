@@ -33,7 +33,7 @@ class LocationResource extends Resource
             ->schema([
                 //
                 TextInput::make('name')
-                ->unique(Location::class,'name',ignoreRecord: true)
+                ->unique(ignoreRecord:true)
             ]);
     }
 
@@ -46,7 +46,6 @@ class LocationResource extends Resource
             ])
             ->filters([
                 //
-                TrashedFilter::make()
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

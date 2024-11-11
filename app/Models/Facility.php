@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Facility extends Model
 {
@@ -19,6 +20,16 @@ class Facility extends Model
         'tags' => 'array',
         'attachments' => 'array',
     ];
+
+    protected static function booted()
+    {
+      static::creating(function (Facility $facility) {
+        $facility->slug = Str::slug($facility->name);
+      });
+      static::updating(function (Facility $facility) {
+        $facility->slug = Str::slug($facility->name);
+      });
+    }
 
     public function categories() : BelongsToMany
     {
@@ -56,19 +67,23 @@ class Facility extends Model
     {
         $query = self::query();
 
-        if ($location) {
+        if (filled($location)) {
             $query->where('location', 'like', '%' . $location . '%');
         }
 
-        if ($q) {
+        if (filled($q)) {
             $query->where(function($sub) use($q) {
               $sub->where('tags', 'like', '%' . $q . '%')
               ->orWhere('name' , 'like' ,'%'. $q .'%')
-              ->orWhere('address', 'like' , '%' . $q . '%');
+              ->orWhere('address', 'like' , '%' . $q . '%')
+              ->orWhereHas('services' , function($service) use($q) {
+                $service->where('name','like','%'.$q.'%');
+              });
+              
             });
         }
 
-        if ($category) {
+        if (filled($category)) {
             $query->whereHas('categories' , function($inner) use($category){
               $inner->where('slug', 'like', '%' . $category . '%');
             });

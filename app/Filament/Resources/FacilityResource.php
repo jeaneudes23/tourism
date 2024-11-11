@@ -81,10 +81,6 @@ class FacilityResource extends Resource
                     ->hiddenOn(Facilities::class),
                     TextInput::make('name')
                     ->required()
-                    ->live(onBlur:true)
-                    ->afterStateUpdated(fn ($state, Set $set) => $set('slug' , Str::slug($state))),
-                    TextInput::make('slug')
-                    ->required()
                     ->unique(ignoreRecord:true),
                     TagsInput::make('tags')
                     ->separator(',')

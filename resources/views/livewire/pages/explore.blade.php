@@ -72,7 +72,7 @@ with(fn() => ['facilities' => Facility::search($this->category, $this->location,
     <div class="container py-16">
         <x-loader-fw />
         <div class="grid gap-4">
-            <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8">
                 @forelse ($facilities as $facility)
                   <x-facility-card :facility="$facility"/>
                 @empty

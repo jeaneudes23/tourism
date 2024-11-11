@@ -52,7 +52,7 @@ with(fn() => ['facilities' => auth()->user()->bookmarks()
         </div>
     </div>
     <div class="grid gap-4">
-        <div class="grid gap-8 grid-cols-2">
+        <div class="grid sm:grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8">
             @forelse ($facilities as $facility)
               <x-facility-card :facility='$facility'/>
             @empty

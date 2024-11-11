@@ -7,7 +7,7 @@
       </div>
       <div class="grid gap-3">
           <div class="grid gap-1">
-              <h3 class="text-2xl font-bold">{{ $facility->name }}</h3>
+              <h3 class="text-xl font-bold">{{ $facility->name }}</h3>
               <div class="divide-x font-medium text-sm ">
                   @forelse ($facility->categories as $index => $category)
                       <span
