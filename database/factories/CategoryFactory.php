@@ -20,7 +20,6 @@ class CategoryFactory extends Factory
         return [
             //
             'name' => fake()->word(),
-            'slug' => fn(array $attributes) => Str::slug($attributes['name']),
             'image' => '',
         ];
     }

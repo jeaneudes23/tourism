@@ -26,32 +26,29 @@ class DatabaseSeeder extends Seeder
     $categories = [
       [
         'name' => 'Hotels',
-        'slug' => 'hotels',
         'image' => 'category-headers/hotel.png',
       ],
       [
         'name' => 'Car Rental',
-        'slug' => 'car-rental',
         'image' => 'category-headers/car.png',
       ],
       [
         'name' => 'Museums',
-        'slug' => 'museums',
         'image' => 'category-headers/museum.png',
       ],
       [
         'name' => 'Gyms',
-        'slug' => 'gym',
         'image' => 'category-headers/gym.png',
       ],
       [
         'name' => 'Marketplace',
-        'slug' => 'marketplace',
         'image' => 'category-headers/market.png',
       ],
     ];
 
-    DB::table('categories')->insert($categories);
+    foreach ($categories as $key => $category) {
+      Category::create($category);
+    };
 
     $locations = [['name' => 'Kigali'], ['name' => 'Musanze'], ['name' => 'Gisenyi'], ['name' => 'Butare']];
 

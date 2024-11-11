@@ -41,7 +41,8 @@ class CategoryResource extends Resource
   protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
   protected static ?string $navigationGroup = 'Collection';
 
-  public static function getNavigationBadge(): ?string{
+  public static function getNavigationBadge(): ?string
+  {
     return static::getModel()::count();
   }
 
@@ -67,13 +68,8 @@ class CategoryResource extends Resource
           ->columns(2)
           ->schema([
             TextInput::make('name')
-              ->live(onBlur:true)
-              ->afterStateUpdated(fn ($state , Set $set) => $set('slug', Str::slug($state)))
-            ->unique(ignoreRecord:true)
-            ->required(),
-            TextInput::make('slug')
-            ->unique(ignoreRecord:true)
-            ->required(),
+              ->unique(ignoreRecord: true)
+              ->required(),
             FileUpload::make('image')
               ->directory('category-headers')
               ->required()
@@ -111,33 +107,6 @@ class CategoryResource extends Resource
       ]);
   }
 
-  public static function infolist(Infolist $infolist): Infolist
-  {
-    return $infolist
-      ->schema([
-        ComponentsSection::make()
-          ->compact()
-          ->schema([
-            Split::make([
-              TextEntry::make('name')
-                ->hiddenLabel()
-                ->size('lg')
-                ->weight('bold'),
-              
-            ]),
-            ImageEntry::make('image')
-              ->extraImgAttributes(['class' => 'w-full'])
-              ->height('auto')
-              ->columnSpanFull()
-              ->hiddenLabel(),
-            TextEntry::make('description')
-              ->columnSpanFull(),
-            TextEntry::make('tags')
-              ->badge()
-              ->columnSpanFull(),
-          ])
-      ]);
-  }
 
   public static function getRelations(): array
   {
