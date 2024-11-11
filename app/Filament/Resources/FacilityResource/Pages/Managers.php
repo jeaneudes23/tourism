@@ -15,6 +15,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\AttachAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -46,7 +47,7 @@ class Managers extends ManageRelatedRecords
                 TextColumn::make('name'),
                 TextColumn::make('email'),
                 TextColumn::make('phone'),
-                TextColumn::make('type'),
+                ToggleColumn::make('is_active')
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make()
