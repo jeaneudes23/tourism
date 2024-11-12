@@ -18,7 +18,7 @@ class ApplicationLogo extends Component
         
         return <<<'HTML'
         <div class="inline-flex items-center gap-2">
-            <img src="{{asset($logo)}}" alt="" class="h-6">
+            <img src="{{asset($logo)}}" alt="" class="h-10">
             <span class="text-lg capitalize font-medium tracking-wide">{{env('APP_NAME')}}</span>
         </div>
         HTML;

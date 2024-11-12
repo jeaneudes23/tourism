@@ -25,6 +25,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
@@ -166,6 +167,16 @@ class BookingResource extends Resource
       ])
       ->filters([
         //
+        SelectFilter::make('customer_id')
+        ->relationship('customer','name')
+        ->searchable()
+        ->preload(),
+        SelectFilter::make('status')
+        ->options([
+          'pending' => 'Pending',
+          'cancelled' => 'Cancelled',
+          'confirmed' => 'Confirmed',
+        ])
       ])
       ->actions([
         Tables\Actions\ViewAction::make(),

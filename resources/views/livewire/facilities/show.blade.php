@@ -23,11 +23,11 @@ $changeTab = function ($tab) {
         <div class="xl:h-dvh">
             <img class="w-full h-full object-cover" src={{ asset('/storage/' . $facility->image) }} alt="">
         </div>
-        <div class="grid content-center px-8">
+        <div class="grid content-center px-8 space-y-4">
             <h1 class="text-4xl lg:text-5xl  font-bold tracking-wider">
                 {{ $facility->name }}
             </h1>
-            <p class=" max-w-screen-md font-medium tracking-wide md:text-lg">{{ $facility->title }}</p>
+            <p class="max-w-screen-md font-medium tracking-wide md:text-lg">{{ $facility->title }}</p>
         </div>
     </div>
     <div class="container max-w-7xl">
@@ -46,11 +46,8 @@ $changeTab = function ($tab) {
                 </div>
             </div>
         </div>
-        <div class="flex gap-12 items-center justify-between">
-
-        </div>
         <x-loader-fw />
-        <div class="py-12">
+        <div class="py-4">
             @if ($tab == 'Home')
                 <livewire:facilities.description :description='$facility->description' />
             @endif

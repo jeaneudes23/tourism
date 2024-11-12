@@ -17,6 +17,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CustomerResource extends Resource
@@ -40,7 +41,10 @@ class CustomerResource extends Resource
   {
     return UserResource::table($table);
   }
-
+  public static function canEdit(Model $record): bool
+  {
+    return false;
+  }
   public static function getRelations(): array
   {
     return [
