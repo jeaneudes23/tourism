@@ -22,22 +22,12 @@ $categories = computed(function () {
     return Category::get(['name', 'slug']);
 })->persist();
 
-$overlay = computed(function () {
-    return 'storage/' . FrontPageContent::first()->overlay;
-})->persist();
-
 with(fn() => ['facilities' => Facility::search($this->category, $this->location, $this->q)]);
 
 ?>
 
 <div>
-    <div class="bg-gradient-to-tr from-primary from-20% to-80% via-green-600/60 bg-primary to-primary  grid">
-        <div class="col-start-1 row-start-1">
-            <img src={{ asset($this->overlay) }} class="max-w-20 rotate-180">
-        </div>
-        <div class="col-start-1 row-start-1 self-end">
-            <img src={{ asset($this->overlay) }} class="max-w-32 float-end">
-        </div>
+    <div class="bg-primary  grid">
         <div class="col-start-1 row-start-1 max-w-2xl px-4 mx-auto space-y-8 py-16 md:py-20 z-10">
             <h2 class="text-4xl font-bold capitalize text-center text-primary-foreground">Explore Places</h2>
             <div class="grid sm:grid-cols-3">

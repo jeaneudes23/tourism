@@ -1,12 +1,6 @@
 <x-app-layout>
 
     <section class="grid">
-        <div class="container col-start-1 row-start-1 self-start">
-          <img src="{{asset('storage/'.$frontPage->overlay)}}" class="object-contain max-h-32 float-start rotate-180" alt="">
-        </div>
-        <div class="container col-start-1 row-start-1 self-end">
-          <img src="{{asset('storage/'.$frontPage->overlay)}}" class="object-contain max-h-64 float-end" alt="">
-        </div>
         <div class="container col-start-1 row-start-1 grid  place-content-center text-center py-16 lg:h-dvh z-10 bg-background lg:bg-transparent">
           <div class="grid gap-4 mb-8">
               <h1 class="text-4xl lg:text-6xl  font-bold tracking-wider">
