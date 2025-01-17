@@ -33,6 +33,7 @@
 
         </footer>
     </div>
+    @livewire('notifications')
     @filamentScripts
 </body>
 

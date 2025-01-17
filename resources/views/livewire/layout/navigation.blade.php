@@ -21,7 +21,7 @@ new class extends Component {
         <!-- Logo -->
         <div class="shrink-0 flex-grow flex items-center gap-6">
             <a href="{{ route('home') }}" wire:navigate>
-                <livewire:application-logo />
+                <x-application-logo />
             </a>
 
           

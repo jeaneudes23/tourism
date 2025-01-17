@@ -26,6 +26,8 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->spa()
+            ->brandLogo(asset('storage/logo.jpg'))
+            ->brandLogoHeight('50px')
             ->databaseNotifications()
             ->id('admin')
             ->profile(EditProfile::class)

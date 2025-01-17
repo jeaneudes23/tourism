@@ -49,7 +49,8 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
+            <x-text-input pattern="^[^@]+@[^@]+\.com$" oninvalid="this.setCustomValidity('Enter User Name Here')"
+            oninput="this.setCustomValidity('')"  wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -81,9 +82,7 @@ new #[Layout('layouts.guest')] class extends Component
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+            <button class="bg-primary text-gray-50 font-medium ml-3 rounded-md p-3">Register</button>
         </div>
     </form>
 </div>

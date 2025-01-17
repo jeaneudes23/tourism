@@ -20,8 +20,7 @@ use Filament\Support\Colors\Color;
 use Livewire\Volt\Component;
 use Illuminate\Support\Str;
 
-new class extends Component implements HasForms, HasActions
-{
+new class extends Component implements HasForms, HasActions {
     //
     use InteractsWithForms;
     use InteractsWithActions;
@@ -32,6 +31,7 @@ new class extends Component implements HasForms, HasActions
     {
         return CreateAction::make()
             ->color('primary')
+            ->successNotificationTitle('Booking Requested')
             ->label($this->service->custom_text)
             ->model(Booking::class)
             ->createAnother(false)
@@ -43,14 +43,10 @@ new class extends Component implements HasForms, HasActions
                             ->columnSpan(2)
                             ->columns(3)
                             ->schema([
-                                DateTimePicker::make('booking_date')
-                                    ->minDate(now()->addDays(2))
-                                    ->closeOnDateSelection()
-                                    ->native(0)
-                                    ->required(),
+                                DateTimePicker::make('booking_date')->minDate(now()->startOfDay())->closeOnDateSelection()->native(0)->required(),
                                 TextInput::make('quantity')
                                     ->required()
-                                    ->live(onBlur: true)
+                                    ->live()
                                     ->integer()
                                     ->minValue(1)
                                     ->label(Str::plural($this->service->unit))
@@ -73,23 +69,24 @@ new class extends Component implements HasForms, HasActions
                 $data['facility_id'] = $this->service->facility->id;
                 return $data;
             })
-            ->after(function (Booking $record){
-              Notification::make()
-              ->title('New Booking')
-              ->actions([
-                Action::make('view')
-                  ->icon('heroicon-o-eye')
-                  ->url(BookingResource::getUrl('view', ['record' => $record->id] , true ,'facility' , $record->facility))
-                  ->button()
-              ])
-              ->sendToDatabase($record->facility->managers);
-
+            ->after(function (Booking $record) {
+                Notification::make()
+                    ->title('New Booking')
+                    ->actions([
+                        Action::make('view')
+                            ->icon('heroicon-o-eye')
+                            ->url(BookingResource::getUrl('view', ['record' => $record->id], true, 'facility', $record->facility))
+                            ->button(),
+                    ])
+                    ->sendToDatabase($record->facility->managers);
+                
+                if (!$record->facility->customers()->where('customer_id', $record->customer_id)->exists()) $record->facility->customers()->attach($record->customer);
             });
     }
 }; ?>
 
 <div>
-    {{ $this->createAction }}
+  {{ $this->createAction }}
 
-    <x-filament-actions::modals />
+  <x-filament-actions::modals />
 </div>

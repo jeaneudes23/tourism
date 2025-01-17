@@ -22,8 +22,6 @@ return new class extends Migration
             $table->enum('status', ['pending','cancelled','confirmed'])->default('pending');
 
             $table->timestamp('booking_date')->nullable();
-            $table->timestamp('confirm_date')->nullable();
-            $table->timestamp('cancel_date')->nullable();
 
             $table->integer('quantity')->nullable();
             $table->decimal('total_price',8,2)->nullable();

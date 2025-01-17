@@ -32,6 +32,8 @@ class FacilityPanelProvider extends PanelProvider
             ->login()
             ->databaseNotifications()
             ->spa()
+            ->brandLogo(asset('storage/logo.jpg'))
+            ->brandLogoHeight('50px')
             ->navigationItems([
                 NavigationItem::make()
                 ->label('Front Page')
