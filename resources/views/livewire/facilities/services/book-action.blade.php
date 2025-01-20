@@ -3,6 +3,8 @@
 use App\Filament\Facility\Resources\BookingResource;
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\User;
+use App\Notifications\BookingUpdate;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\CreateAction;
@@ -81,6 +83,8 @@ new class extends Component implements HasForms, HasActions {
                     ->sendToDatabase($record->facility->managers);
                 
                 if (!$record->facility->customers()->where('customer_id', $record->customer_id)->exists()) $record->facility->customers()->attach($record->customer);
+                $customer = User::find($record->customer_id);
+                $customer->notify(new BookingUpdate($record));
             });
     }
 }; ?>

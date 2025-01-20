@@ -3,8 +3,10 @@
 namespace App\Livewire;
 
 use App\Models\Booking;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -45,7 +47,11 @@ class CustomerBookings extends BaseWidget
               ->requiresConfirmation()
               ->action(fn (Booking $record) => $record->delete())
               ->icon('heroicon-o-x-mark')
-              ->visible(fn (Booking $record): bool => $record->status !== 'confirmed')
+              ->visible(fn (Booking $record): bool => $record->status !== 'confirmed'),
+              ViewAction::make()
+              ->form([
+                Textarea::make('manager_message')
+              ])
             ]);
     }
 }
